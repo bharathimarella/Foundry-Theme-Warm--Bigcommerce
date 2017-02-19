@@ -1,0 +1,115 @@
+<!doctype html>
+<html class="no-js" lang="{{ locale_name }}">
+
+<head>
+  <script>document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'js');</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
+
+  {{{head.meta_tags}}}
+
+  <title>{{head.title}}</title>
+
+  {{{head.config}}}
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="{{head.favicon}}" rel="shortcut icon">
+
+  <style type="text/css">
+    @font-face {
+      /*font-family: "form-icons";*/
+      /*src: url({{cdn "assets/fonts/form-icons.eot"}});*/
+      /*src: url({{cdn "assets/fonts/form-icons.woff"}}) format("woff");*/
+      
+      /*font-weight: normal;*/
+      /*font-style: normal;*/
+      
+    }
+  </style>
+
+  {{{stylesheet '/assets/css/theme.css'}}}
+
+  {{getFontsCollection}}
+
+  {{{head.scripts}}}
+  {{{head.rsslinks}}}
+
+  {{> components/common/theme-object}}
+  {{> components/global-injects}}
+  {{{snippet 'html_head'}}}
+
+  {{> core/structured-data/website}}
+</head>
+
+<body class="{{> components/body-classes}} mobile-nav-closed" data-currency-token="{{settings.money.currency_token}}" data-currency-location="{{settings.money.currency_location}}">
+
+  {{#if page_type '===' 'product'}}
+    {{> components/common/facebook-like}}
+  {{else if page_type '===' 'blog'}}
+    {{> components/common/facebook-like}}
+  {{else if page_type '===' 'blog_post'}}
+    {{> components/common/facebook-like}}
+  {{/if}}
+
+  {{#if theme_settings.show_quick_shop}}
+    <div class="quick-shop-wrapper" data-quick-shop-wrapper>
+      <div class="quick-shop" data-quick-shop></div>
+      {{> components/common/spinner}}
+      <button class="quick-shop-close" data-quick-shop-close>
+        <i class="icon-close"></i>
+      </button>
+    </div>
+  {{/if}}
+
+  {{> components/header-banners}}
+
+  {{#if theme_settings.header_layout '===' 'left-aligned'}}
+    {{> components/header}}
+  {{else}}
+    {{> components/header-alternate}}
+  {{/if}}
+  
+  <div class="main-content">
+      <div class="heder_wood_image hidden-lg" style="width:100%;height:36px"><img style="width:100%;height:100%" src="//static1.squarespace.com/static/5808e5a8bebafbc65c34cc1a/t/582aac8059cc68c3cd3ef260/1479191683298/Wood-Plank-Image.png"></div>
+
+    {{#block "page"}}{{/block}}
+  </div>
+  <div class="footer_wood_image" style="width:100%;height:45px"><img style="width:100%;height:100%" src="//static1.squarespace.com/static/5808e5a8bebafbc65c34cc1a/t/582aac8059cc68c3cd3ef260/1479191683298/Wood-Plank-Image.png"></div>
+
+
+
+  {{> components/footer}}
+
+  {{> core/structured-data/breadcrumbs}}
+
+  <script>
+    function startupApp(stencilBootstrap) {
+      stencilBootstrap("{{template_file}}", {{jsContext}}).load();
+    }
+  </script>
+
+  {{#if in_production}}
+    <script src="{{cdn '/assets/js/bundle.js'}}"></script>
+    <script>
+      startupApp(stencilBootstrap);
+    </script>
+  {{else}}
+    <script src="{{cdn '/assets/jspm_packages/system.js'}}"></script>
+    <script src="{{cdn '/assets/config.js'}}"></script>
+    <script src="{{cdn '/assets/js/dependency-bundle.js'}}"></script>
+    <script>
+      System.import("js/app").then(function(){ startupApp(stencilBootstrap)});
+    </script>
+  {{/if}}
+
+  {{{footer.scripts}}}
+  {{{snippet 'footer'}}}
+</body>
+</html>

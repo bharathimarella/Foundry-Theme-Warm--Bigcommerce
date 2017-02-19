@@ -1,0 +1,104 @@
+<section class="navigation-wrap navigation-alternate
+  {{#if theme_settings.logo-position '==' 'logo-right'}}navigation-left{{/if}}
+  {{#if theme_settings.logo-position '==' 'logo-center'}}navigation-center{{/if}}">
+  <nav class="navigation" style="margin-left:1%">
+
+    <button class="navigation-toggle-mobile-wrapper close">
+      <span class="navigation-toggle-mobile"><i class="fa fa-times" aria-hidden="true"></i></span>
+    </button>
+
+    <div class="mobile-branding">
+      {{#if settings.store_logo.image}}
+        <a class="header-branding-logo" href="{{urls.home}}">
+          <img class="header-branding-image" src="{{getImage settings.store_logo.image 'logo'}}" alt="{{settings.store_logo.title}}">
+        </a>
+      {{else}}
+        <h1 class="header-branding-text">
+          <a href="{{urls.home}}">{{settings.store_logo.title}}</a>
+        </h1>
+      {{/if}}
+    </div>
+
+    <ul class="mobile-actions">
+
+      <li class="mobile-action-item search-toggle">
+        <a href="#"><i class="fa fa-search"></i></a>
+      </li>
+
+      <li class="mobile-action-item cart-count-preview">
+        <a href="{{urls.cart}}">
+          <i class="fa fa-shopping-cart"></i>
+        </a>
+        <div class="cart-preview">
+          {{> components/cart/cart-preview}}
+        </div>
+      </li>
+
+      {{#if settings.account_creation_enabled}}
+        <li class="mobile-action-item user-account">
+          {{#if customer}}
+            <a class="navUser-action" href="{{urls.account.index}}"><i class="fa fa-user-circle"></i></a>
+          {{else}}
+            <a class="navUser-action" href="{{urls.auth.login}}"><i class="fa fa-user-circle"></i></a>
+          {{/if}}
+        </li>
+      {{/if}}
+
+    </ul>
+
+    <div class="mobile-search-wrapper search-form-wrapper">
+      <form class="search-form" action="{{urls.search}}">
+        <input class="search-input" name="search_query" placeholder="{{lang 'header.search'}}">
+      </form>
+    </div>
+
+    <div class="header-branding" style="width:31%;margin-top:0px">
+      {{#if settings.store_logo.image}}
+        <a class="header-branding-logo" href="{{urls.home}}">
+        <img class="header-branding-image" src="/product_images/uploaded_images/psz-logo.png" alt="{{settings.store_logo.title}}">
+        </a>
+        
+        
+      {{else}}
+        <h1 class="header-branding-text">
+          <a href="{{urls.home}}">{{settings.store_logo.title}}</a>
+             
+        </h1>
+      {{/if}}
+      <div class="bentlyLogo" style="display:inline-block;float:right;width:19%;margin:18% 0% 0% 25%;position:absolute;z-index:1">
+            <span style="font-size:14px;margin-top:36%;color:black;font-style: italic;font-family: Baskerville Old Facey;font-weight: bolder;float: left"><em>Fueled by...</em></span>
+            <img src="/product_images/uploaded_images/bent.png" alt="bently's logo" style="width:56%">
+    </div>
+    </div>
+
+    <ul class="navigation-tier nav-menu" style="margin-left:43%;margin-top:1%">
+
+      {{#each categories}}
+        <li class="nav-menu-item {{#if children}}has-dropdown{{/if}}">
+            {{> components/navigation-item}}
+        </li>
+      {{/each}}
+
+      {{#if settings.account_creation_enabled}}
+        <li class="nav-menu-item mobile-list-item">
+          {{#if customer}}
+            <a href="{{urls.account.index}}">{{lang 'header.logged_in_as' name=customer.name}}</a>
+            <a href="{{urls.auth.logout}}">{{lang 'header.log_out' }}</a>
+          {{else}}
+            <a href="{{urls.auth.login}}">{{lang 'header.log_in'}}</a>
+          {{/if}}
+        </li>
+      {{/if}}
+
+    </ul>
+    
+  </nav>
+ <div class="heder_wood_image" style="width:100%;height:45px;margin-top:10%">
+        <img style="width:100%;height:100%" src="//static1.squarespace.com/static/5808e5a8bebafbc65c34cc1a/t/582aac8059cc68c3cd3ef260/1479191683298/Wood-Plank-Image.png">
+ </div>
+  <!--<div class="navigation-overlay">-->
+       
+  <!--</div>-->
+<!--<img style="width:100%;height:45px;margin-bottom:0px" src="//static1.squarespace.com/static/5808e5a8bebafbc65c34cc1a/t/582aac8059cc68c3cd3ef260/1479191683298/Wood-Plank-Image.png">-->
+
+</section>
